@@ -1,4 +1,5 @@
 import os
+from openhands.llm.flow import flow_ai_completion
 
 __package_name__ = 'openhands_ai'
 
@@ -29,7 +30,6 @@ def get_version():
         pass
 
     return 'unknown'
-
 
 try:
     __version__ = get_version()
