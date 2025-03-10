@@ -6,6 +6,7 @@ This is similar to the functionality of `CodeActResponseParser`.
 import json
 
 from browsergym.core.action.highlevel import HighLevelActionSet
+from openhands.core.logger import openhands_logger as logger
 from litellm import (
     ChatCompletionToolParam,
     ChatCompletionToolParamFunctionChunk,
@@ -472,8 +473,16 @@ def combine_thought(action: Action, thought: str) -> Action:
     return action
 
 
+def log(level: str, message: str, extra: dict | None = None) -> None:
+    """Logs a message to the agent controller's logger."""
+    message = f'[Agent Controller] {message}'
+    getattr(logger, level)(message, extra=extra, stacklevel=2)
+
 def response_to_actions(response: ModelResponse) -> list[Action]:
     actions: list[Action] = []
+
+    log('info', f'Response: {response}')
+
     assert len(response.choices) == 1, 'Only one choice is supported for now'
     assistant_msg = response.choices[0].message
     if assistant_msg.tool_calls:
