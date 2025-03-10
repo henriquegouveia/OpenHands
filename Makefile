@@ -228,7 +228,7 @@ _run_setup:
 # Run the app (standard mode)
 run:
 	@$(MAKE) -s _install_ngrok
-	ngrok http --url=joint-ghost-simple.ngrok-free.app $(FRONTEND_PORT) --log=stdout --log-level=debug &
+	ngrok http --url=joint-ghost-simple.ngrok-free.app $(FRONTEND_PORT) --log=stdout > /dev/null 2>&1 &
 	@echo "$(YELLOW)Running the app...$(RESET)"
 	@$(MAKE) -s _run_setup
 	@$(MAKE) -s start-frontend

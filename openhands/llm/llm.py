@@ -4,6 +4,7 @@ import time
 import warnings
 from functools import partial
 from typing import Any, Callable
+from openhands.llm.flow import flow_ai_completion, flow_bedrock_completion
 
 import requests
 
@@ -157,8 +158,8 @@ class LLM(RetryMixin, DebugMixin):
             )  # temperature is not supported for reasoning models
 
         self._completion = partial(
-            litellm_completion,
-            model=self.config.model,
+            flow_bedrock_completion,
+            model='flow-ai-claude',
             api_key=self.config.api_key.get_secret_value()
             if self.config.api_key
             else None,
@@ -167,8 +168,6 @@ class LLM(RetryMixin, DebugMixin):
             custom_llm_provider=self.config.custom_llm_provider,
             max_completion_tokens=self.config.max_output_tokens,
             timeout=self.config.timeout,
-            top_p=self.config.top_p,
-            drop_params=self.config.drop_params,
             **kwargs,
         )
 
