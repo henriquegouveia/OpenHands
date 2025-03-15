@@ -1,6 +1,6 @@
 import React from "react";
 import GitHubLogo from "#/assets/branding/github-logo.svg?react";
-import AllHandsLogo from "#/assets/branding/all-hands-logo.svg?react";
+import AllHandsLogo from "#/assets/branding/aisembly-logo.svg?react";
 import { JoinWaitlistAnchor } from "./join-waitlist-anchor";
 import { WaitlistMessage } from "./waitlist-message";
 import { ModalBackdrop } from "#/components/shared/modals/modal-backdrop";
@@ -30,7 +30,7 @@ export function WaitlistModal({
   return (
     <ModalBackdrop>
       <ModalBody>
-        <AllHandsLogo width={68} height={46} />
+        <AllHandsLogo width={125} height={125} />
         <WaitlistMessage content={ghTokenIsSet ? "waitlist" : "sign-in"} />
 
         <TOSCheckbox onChange={() => setIsTosAccepted((prev) => !prev)} />

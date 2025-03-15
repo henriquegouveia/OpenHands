@@ -88,7 +88,6 @@ export function Sidebar() {
                 <FaListUl size={22} />
               </TooltipButton>
             )}
-            <DocsButton />
           </div>
 
           <div className="flex flex-col items-center gap-[26px] mb-4">

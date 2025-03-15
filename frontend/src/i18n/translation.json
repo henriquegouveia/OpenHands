@@ -2094,7 +2094,7 @@
         "ja": "エージェントが一時停止中"
     },
     "LANDING$TITLE": {
-        "en": "Let's start building!",
+        "en": "AIsembly",
         "ja": "開発を始めましょう！",
         "zh-CN": "让我们开始构建！",
         "zh-TW": "讓我們開始建構！",
@@ -2109,7 +2109,7 @@
         "tr": "Hadi inşa etmeye başlayalım!"
     },
     "LANDING$SUBTITLE": {
-        "en": "OpenHands makes it easy to build and maintain software using a simple prompt.",
+        "en": "Building software in a smarter way!",
         "ja": "OpenHandsは、シンプルなプロンプトを使用してソフトウェアの開発と保守を簡単にします。",
         "zh-CN": "OpenHands 使用简单的提示来轻松构建和维护软件。",
         "zh-TW": "OpenHands 使用簡單的提示來輕鬆建構和維護軟體。",

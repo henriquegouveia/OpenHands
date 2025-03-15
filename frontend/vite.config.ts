@@ -30,6 +30,9 @@ export default defineConfig(({ mode }) => {
       svgr(),
     ],
     server: {
+      allowedHosts: [
+        'joint-ghost-simple.ngrok-free.app'
+      ],
       port: FE_PORT,
       proxy: {
         "/api": {

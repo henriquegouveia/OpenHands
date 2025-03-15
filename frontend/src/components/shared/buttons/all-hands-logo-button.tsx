@@ -1,4 +1,4 @@
-import AllHandsLogo from "#/assets/branding/all-hands-logo.svg?react";
+import AllHandsLogo from "#/assets/branding/aisembly-logo.svg?react";
 import { TooltipButton } from "./tooltip-button";
 
 interface AllHandsLogoButtonProps {
@@ -8,11 +8,11 @@ interface AllHandsLogoButtonProps {
 export function AllHandsLogoButton({ onClick }: AllHandsLogoButtonProps) {
   return (
     <TooltipButton
-      tooltip="All Hands AI"
-      ariaLabel="All Hands Logo"
+      tooltip="AIsembly"
+      ariaLabel="AIsembly Logo"
       onClick={onClick}
     >
-      <AllHandsLogo width={34} height={23} />
+      <AllHandsLogo width={32} height={32} />
     </TooltipButton>
   );
 }
