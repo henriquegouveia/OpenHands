@@ -2,7 +2,7 @@ SHELL=/usr/bin/env bash
 # Makefile for OpenHands project
 
 # Variables
-BACKEND_HOST ?= "127.0.0.1"
+BACKEND_HOST ?= "0.0.0.0"
 BACKEND_PORT = 3000
 BACKEND_HOST_PORT = "$(BACKEND_HOST):$(BACKEND_PORT)"
 FRONTEND_PORT = 3001
@@ -192,6 +192,21 @@ start-backend:
 	@echo "$(YELLOW)Starting backend...$(RESET)"
 	@poetry run uvicorn openhands.server.listen:app --host $(BACKEND_HOST) --port $(BACKEND_PORT) --reload --reload-exclude "./workspace"
 
+_install_ngrok:
+	@echo "$(YELLOW)Checking for ngrok installation...$(RESET)"
+	@if ! command -v ngrok > /dev/null; then \
+		echo "$(YELLOW)Installing ngrok...$(RESET)"; \
+		curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+			| sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+			&& echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+			| sudo tee /etc/apt/sources.list.d/ngrok.list \
+			&& sudo apt update \
+			&& sudo apt install ngrok; \
+		echo "$(GREEN)Ngrok installed successfully.$(RESET)"; \
+	else \
+		echo "$(GREEN)Ngrok is already installed.$(RESET)"; \
+	fi
+
 # Start frontend
 start-frontend:
 	@echo "$(YELLOW)Starting frontend...$(RESET)"
@@ -219,6 +234,8 @@ _run_setup:
 
 # Run the app (standard mode)
 run:
+	@$(MAKE) -s _install_ngrok
+	ngrok http --url=joint-ghost-simple.ngrok-free.app $(FRONTEND_PORT) --log=stdout > /dev/null 2>&1 &
 	@echo "$(YELLOW)Running the app...$(RESET)"
 	@$(MAKE) -s _run_setup
 	@$(MAKE) -s start-frontend

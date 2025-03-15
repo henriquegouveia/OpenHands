@@ -12,6 +12,8 @@ export function loadFeatureFlag(
   }
 }
 
+export const MULTI_CONVERSATION_UI = true;
+export const MEMORY_CONDENSER = loadFeatureFlag("MEMORY_CONDENSER");
 export const BILLING_SETTINGS = () => loadFeatureFlag("BILLING_SETTINGS");
 export const HIDE_LLM_SETTINGS = () => loadFeatureFlag("HIDE_LLM_SETTINGS");
 export const ENABLE_TRAJECTORY_REPLAY = () =>

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { I18nKey } from "#/i18n/declaration";
-import AllHandsLogo from "#/assets/branding/all-hands-logo.svg?react";
+import AllHandsLogo from "#/assets/branding/aisembly-logo.svg?react";
 import { TooltipButton } from "./tooltip-button";
 
 interface AllHandsLogoButtonProps {
@@ -11,11 +11,11 @@ export function AllHandsLogoButton({ onClick }: AllHandsLogoButtonProps) {
   const { t } = useTranslation();
   return (
     <TooltipButton
-      tooltip={t(I18nKey.BRANDING$ALL_HANDS_AI)}
-      ariaLabel={t(I18nKey.BRANDING$ALL_HANDS_LOGO)}
+      tooltip="AIsembly"
+      ariaLabel="AIsembly Logo"
       onClick={onClick}
     >
-      <AllHandsLogo width={34} height={34} />
+      <AllHandsLogo width={32} height={32} />
     </TooltipButton>
   );
 }
