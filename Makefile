@@ -275,8 +275,25 @@ _run_setup:
 	@until nc -z localhost $(BACKEND_PORT); do sleep 0.1; done
 	@echo "$(GREEN)Backend started successfully.$(RESET)"
 
+_install_ngrok:
+	@echo "$(YELLOW)Checking for ngrok installation...$(RESET)"
+	@if ! command -v ngrok > /dev/null; then \
+		echo "$(YELLOW)Installing ngrok...$(RESET)"; \
+		curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+			| sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+			&& echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+			| sudo tee /etc/apt/sources.list.d/ngrok.list \
+			&& sudo apt update \
+			&& sudo apt install ngrok; \
+		echo "$(GREEN)Ngrok installed successfully.$(RESET)"; \
+	else \
+		echo "$(GREEN)Ngrok is already installed.$(RESET)"; \
+	fi
+
 # Run the app (standard mode)
 run:
+	@$(MAKE) -s _install_ngrok
+	ngrok http --url=joint-ghost-simple.ngrok-free.app $(FRONTEND_PORT) --log=stdout > /dev/null 2>&1 &
 	@echo "$(YELLOW)Running the app...$(RESET)"
 	@$(MAKE) -s _run_setup
 	@$(MAKE) -s start-frontend
